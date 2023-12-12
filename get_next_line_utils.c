@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   get_next_line_utils.c                              :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: mel-rhay <mel-rhay@student.42.fr>          +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2023/12/12 15:45:54 by mel-rhay          #+#    #+#             */
+/*   Updated: 2023/12/12 15:52:25 by mel-rhay         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "get_next_line.h"
 
 t_list	*ft_lstlast(t_list *lst)
@@ -7,25 +19,26 @@ t_list	*ft_lstlast(t_list *lst)
 	return (lst);
 }
 
-int search_line(t_list *lst)
+int	search_line(t_list *lst)
 {
-    int i;
-    if (!lst)
-        return 0;
-    while (lst)
-    {
-        i = 0;
-        while (lst->buff[i] && i < BUFFER_SIZE)
-        {
-            if (lst->buff[i] == '\n')
+	int	i;
+
+	if (!lst)
+		return (0);
+	while (lst)
+	{
+		i = 0;
+		while (lst->buff[i] && i < BUFFER_SIZE)
+		{
+			if (lst->buff[i] == '\n')
 			{
-                return 1;
+				return (1);
 			}
-            i++;
-        }
+			i++;
+		}
 		lst = lst->next;
-    }    
-    return 0;
+	}
+	return (0);
 }
 
 int	ft_lstsize(t_list *lst)
@@ -41,9 +54,9 @@ int	ft_lstsize(t_list *lst)
 	return (num);
 }
 
-int check_node(char *s)
+int	check_node(char *s)
 {
-	int i;
+	int	i;
 
 	i = 0;
 	while (s[i])
@@ -57,9 +70,9 @@ int check_node(char *s)
 
 void	del_nodes(t_list **lst)
 {
-	t_list *tmp;
-	int i;
-	int len;
+	t_list	*tmp;
+	int		i;
+	int		len;
 
 	while (*lst)
 	{
@@ -78,10 +91,8 @@ void	del_nodes(t_list **lst)
 			{
 				if ((*lst)->buff[i] == '\n')
 				{
-					//printf("old one : %s", (*lst)->buff);
 					i++;
-					trim_word((*lst)->buff, ((*lst)->buff) + i, len-i);
-					//printf("new one : %s\n", (*lst)->buff);
+					trim_word((*lst)->buff, ((*lst)->buff) + i, len - i);
 					return ;
 				}
 				i++;
