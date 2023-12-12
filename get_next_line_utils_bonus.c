@@ -1,16 +1,16 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   get_next_line_utils.c                              :+:      :+:    :+:   */
+/*   get_next_line_utils_bonus.c                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: mel-rhay <mel-rhay@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/12 15:45:54 by mel-rhay          #+#    #+#             */
-/*   Updated: 2023/12/12 17:17:21 by mel-rhay         ###   ########.fr       */
+/*   Updated: 2023/12/12 18:11:40 by mel-rhay         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "get_next_line.h"
+#include "get_next_line_bonus.h"
 
 t_list	*ft_lstlast(t_list *lst)
 {
@@ -55,27 +55,27 @@ int	check_node(char *s)
 	return (0);
 }
 
-void	del_nodes(t_list **lst, size_t i)
+void	del_nodes(t_list **lst, size_t i, int fd)
 {
 	t_list	*tmp;
 
-	while (*lst)
+	while (lst[fd])
 	{
-		if (!check_node((*lst)->buff))
+		if (!check_node(lst[fd]->buff))
 		{
-			free((*lst)->buff);
-			tmp = (*lst)->next;
-			free((*lst));
-			*lst = tmp;
+			free(lst[fd]->buff);
+			tmp = lst[fd]->next;
+			free(lst[fd]);
+			lst[fd] = tmp;
 		}
 		else
 		{
 			i = 0;
-			while ((*lst)->buff[i])
+			while (lst[fd]->buff[i])
 			{
-				if ((*lst)->buff[i] == '\n')
+				if (lst[fd]->buff[i] == '\n')
 				{
-					trim_word((*lst)->buff, ((*lst)->buff) + i + 1, i + 1);
+					trim_word(lst[fd]->buff, (lst[fd]->buff) + i + 1, i + 1);
 					return ;
 				}
 				i++;

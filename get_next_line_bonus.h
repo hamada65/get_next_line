@@ -1,17 +1,17 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   get_next_line.h                                    :+:      :+:    :+:   */
+/*   get_next_line_bonus.h                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: mel-rhay <mel-rhay@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/12 15:45:58 by mel-rhay          #+#    #+#             */
-/*   Updated: 2023/12/12 17:47:50 by mel-rhay         ###   ########.fr       */
+/*   Updated: 2023/12/12 17:44:22 by mel-rhay         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef GET_NEXT_LINE_H
-# define GET_NEXT_LINE_H
+#ifndef GET_NEXT_LINE_BONUS_H
+# define GET_NEXT_LINE_BONUS_H
 
 # include <fcntl.h>
 # include <limits.h>
@@ -20,7 +20,7 @@
 # include <unistd.h>
 
 # ifndef BUFFER_SIZE
-#  define BUFFER_SIZE 42
+#  define BUFFER_SIZE 10
 # endif
 
 typedef struct s_list
@@ -32,11 +32,11 @@ typedef struct s_list
 char				*get_next_line(int fd);
 void				make_list(t_list **lst, int fd);
 int					search_line(t_list *lst);
-void				add_node(t_list **lst, char *buff);
+void				add_node(t_list **lst, char *buff, int fd);
 t_list				*ft_lstlast(t_list *lst);
 char				*assemble_line(t_list *lst);
 size_t				line_len(t_list *lst);
-void				del_nodes(t_list **lst, size_t i);
+void				del_nodes(t_list **lst, size_t i, int fd);
 int					check_node(char *s);
 size_t				ft_strlen(const char *s);
 void				trim_word(char *dst, const char *src, size_t size);

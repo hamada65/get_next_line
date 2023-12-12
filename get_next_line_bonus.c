@@ -1,31 +1,31 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   get_next_line.c                                    :+:      :+:    :+:   */
+/*   get_next_line_bonus.c                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: mel-rhay <mel-rhay@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/12 15:45:49 by mel-rhay          #+#    #+#             */
-/*   Updated: 2023/12/12 17:49:36 by mel-rhay         ###   ########.fr       */
+/*   Updated: 2023/12/12 18:12:38 by mel-rhay         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "get_next_line.h"
+#include "get_next_line_bonus.h"
 
 char	*get_next_line(int fd)
 {
 	char			*next_line;
-	static t_list	*lst;
+	static t_list	*lst[1024];
 	size_t			index;
 
 	if (fd < 0 || BUFFER_SIZE <= 0)
 		return (0);
-	make_list(&lst, fd);
-	if (!lst)
+	make_list(lst, fd);
+	if (!lst[fd])
 		return (NULL);
-	next_line = assemble_line(lst);
+	next_line = assemble_line(lst[fd]);
 	index = 0;
-	del_nodes(&lst, index);
+	del_nodes(lst, index, fd);
 	return (next_line);
 }
 
@@ -86,7 +86,7 @@ void	make_list(t_list **lst, int fd)
 	char	*buff;
 	int		num_read;
 
-	while (!search_line(*lst))
+	while (!search_line(lst[fd]))
 	{
 		buff = malloc(BUFFER_SIZE + 1);
 		if (!buff)
@@ -98,21 +98,21 @@ void	make_list(t_list **lst, int fd)
 			return ;
 		}
 		buff[num_read] = '\0';
-		add_node(lst, buff);
+		add_node(lst, buff, fd);
 	}
 }
 
-void	add_node(t_list **lst, char *buff)
+void	add_node(t_list **lst, char *buff, int fd)
 {
 	t_list	*new_node;
 	t_list	*last_node;
 
-	last_node = ft_lstlast(*lst);
+	last_node = ft_lstlast(lst[fd]);
 	new_node = malloc((sizeof(t_list)));
 	if (!new_node)
 		return ;
 	if (!last_node)
-		*lst = new_node;
+		lst[fd] = new_node;
 	else
 		last_node->next = new_node;
 	new_node->buff = buff;
@@ -139,12 +139,12 @@ void	add_node(t_list **lst, char *buff)
 // 	s = get_next_line(fd);
 // 	printf("%s", s);
 // 	free(s);
-// 	s = get_next_line(fd);
-// 	printf("%s", s);
-// 	free(s);
-// 	s = get_next_line(fd);
-// 	printf("%s", s);
-// 	free(s);
+// 	// s = get_next_line(fd);
+// 	// printf("%s", s);
+// 	// free(s);
+// 	// s = get_next_line(fd);
+// 	// printf("%s", s);
+// 	// free(s);
 // 	// s = get_next_line(fd);
 // 	// printf("%s", s);
 // 	// free(s);
