@@ -6,7 +6,7 @@
 /*   By: mel-rhay <mel-rhay@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/12 15:45:49 by mel-rhay          #+#    #+#             */
-/*   Updated: 2023/12/12 17:49:36 by mel-rhay         ###   ########.fr       */
+/*   Updated: 2023/12/13 13:53:32 by mel-rhay         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,8 +18,8 @@ char	*get_next_line(int fd)
 	static t_list	*lst;
 	size_t			index;
 
-	if (fd < 0 || BUFFER_SIZE <= 0)
-		return (0);
+	if (fd < 0 || fd >= FD_MAX || BUFFER_SIZE <= 0 || BUFFER_SIZE >= INT_MAX)
+		return (NULL);
 	make_list(&lst, fd);
 	if (!lst)
 		return (NULL);
@@ -84,7 +84,7 @@ size_t	line_len(t_list *lst)
 void	make_list(t_list **lst, int fd)
 {
 	char	*buff;
-	int		num_read;
+	ssize_t	num_read;
 
 	while (!search_line(*lst))
 	{

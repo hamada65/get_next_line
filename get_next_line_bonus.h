@@ -6,7 +6,7 @@
 /*   By: mel-rhay <mel-rhay@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/12 15:45:58 by mel-rhay          #+#    #+#             */
-/*   Updated: 2023/12/12 17:44:22 by mel-rhay         ###   ########.fr       */
+/*   Updated: 2023/12/13 13:59:35 by mel-rhay         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,8 +19,12 @@
 # include <stdlib.h>
 # include <unistd.h>
 
+# ifndef FD_MAX
+#  define FD_MAX 1024
+# endif
+
 # ifndef BUFFER_SIZE
-#  define BUFFER_SIZE 10
+#  define BUFFER_SIZE 42L
 # endif
 
 typedef struct s_list

@@ -6,7 +6,7 @@
 /*   By: mel-rhay <mel-rhay@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/12 15:45:54 by mel-rhay          #+#    #+#             */
-/*   Updated: 2023/12/12 17:17:21 by mel-rhay         ###   ########.fr       */
+/*   Updated: 2023/12/13 13:54:51 by mel-rhay         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,7 +21,7 @@ t_list	*ft_lstlast(t_list *lst)
 
 int	search_line(t_list *lst)
 {
-	int	i;
+	long	i;
 
 	if (!lst)
 		return (0);
